@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Casino</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #222;
+            color: #fff;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 10px 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .auth-buttons button {
+            margin: 0 5px;
+            padding: 10px 15px;
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .auth-buttons button:hover {
+            background-color: #c0392b;
+        }
+
+        #hero {
+            text-align: center;
+            padding: 20px;
+            background-color: #444;
+        }
+
+        #hero img {
+            width: 100%;
+            max-height: 400px;
+            cursor: pointer;
+        }
+
+        #games {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .game-previews {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .game {
+            width: 200px;
+            text-align: center;
+        }
+
+        .game img {
+            width: 200px;
+            height: 300px;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+
+        .payment-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .crypto-address {
+            background-color: #555;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+            color: #0f0;
+        }
+
+        .game-frame {
+            width: 80%;
+            height: 500px;
+            border: none;
+            border-radius: 15px;
+            display: block;
+            margin: 20px auto;
+        }
+
+        #auth-section {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #auth-section form {
+            display: inline-block;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Crypto Casino</div>
+        <div class="auth-buttons">
+            <button onclick="showLogin()">Login</button>
+            <button onclick="showRegister()">Register</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <img src="https://via.placeholder.com/1200x500" alt="Hero Image" onclick="showLogin()">
+    </section>
+
+    <!-- Game Previews -->
+    <section id="games">
+        <h2>Choose Your Game</h2>
+        <div class="game-previews">
+            <div class="game" onclick="openGame('game1')">
+                <img src="https://via.placeholder.com/200x300" alt="Game 1">
+                <p>Game 1</p>
+            </div>
+            <div class="game" onclick="openGame('game2')">
+                <img src="https://via.placeholder.com/200x300" alt="Game 2">
+                <p>Game 2</p>
+            </div>
+            <div class="game" onclick="openGame('game3')">
+                <img src="https://via.placeholder.com/200x300" alt="Game 3">
+                <p>Game 3</p>
+            </div>
+            <div class="game" onclick="openGame('game4')">
+                <img src="https://via.placeholder.com/200x300" alt="Game 4">
+                <p>Game 4</p>
+            </div>
+            <div class="game" onclick="openGame('game5')">
+                <img src="https://via.placeholder.com/200x300" alt="Game 5">
+                <p>Game 5</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Section -->
+    <section id="payments" class="payment-section">
+        <h2>Deposit with Crypto</h2>
+        <p>Send your payment to this address:</p>
+        <div class="crypto-address">1CryptoWalletExampleAddress</div>
+    </section>
+
+    <!-- Game Frame -->
+    <section id="game-frame-section" style="display:none;">
+        <h1 id="game-title"></h1>
+        <iframe id="game-frame" class="game-frame"></iframe>
+    </section>
+
+    <!-- Login/Register Form -->
+    <section id="auth-section">
+        <form id="auth-form">
+            <h2 id="auth-title">Login</h2>
+            <label for="username">Username</label><br>
+            <input type="text" id="username" required><br><br>
+            <label for="password">Password</label><br>
+            <input type="password" id="password" required><br><br>
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <script>
+        function showLogin() {
+            document.getElementById('auth-section').style.display = 'block';
+            document.getElementById('auth-title').innerText = 'Login';
+            hideOtherSections();
+        }
+
+        function showRegister() {
+            document.getElementById('auth-section').style.display = 'block';
+            document.getElementById('auth-title').innerText = 'Register';
+            hideOtherSections();
+        }
+
+        function hideOtherSections() {
+            document.getElementById('games').style.display = 'none';
+            document.getElementById('hero').style.display = 'none';
+            document.getElementById('payments').style.display = 'none';
+            document.getElementById('game-frame-section').style.display = 'none';
+        }
+
+        function openGame(gameId) {
+            const games = {
+                'game1': { title: 'Blackjack', url: 'https://example.com/blackjack' },
+                'game2': { title: 'Roulette', url: 'https://example.com/roulette' },
+                'game3': { title: 'Poker', url: 'https://example.com/poker' },
+                'game4': { title: 'Slots', url: 'https://example.com/slots' },
+                'game5': { title: 'Baccarat', url: 'https://example.com/baccarat' },
+            };
+
+            const game = games[gameId];
+            document.getElementById('game-title').innerText = game.title;
+            document.getElementById('game-frame').src = game.url;
+
+            document.getElementById('game-frame-section').style.display = 'block';
+            hideOtherSections();
+        }
+    </script>
+
+</body>
+</html>
+<!---
+elie123collab/elie123collab is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+You can click the Preview link to take a look at your changes.
+--->
